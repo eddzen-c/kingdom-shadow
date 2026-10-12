@@ -90,7 +90,7 @@ public static class PuebloLunariaFinish
             Cube("Arm",f,new Vector3(-.35f,2.85f,-.02f),new Vector3(.8f,.12f,.12f),10);
             Cube("Lamp",f,new Vector3(-.7f,2.55f,-.02f),new Vector3(.45f,.6f,.45f),0);
             var lt=Child(lv,"LampLight_0"+(i+1)); lt.position=f.TransformPoint(new Vector3(-.7f,2.55f,-.02f));
-            var l=lt.GetComponent<Light>()??lt.gameObject.AddComponent<Light>(); l.type=LightType.Point; l.range=5.5f; l.intensity=1.6f; l.color=new Color(1,.72f,.38f);
+            Light l=lt.GetComponent<Light>(); if(l==null) l=lt.gameObject.AddComponent<Light>(); l.type=LightType.Point; l.range=5.5f; l.intensity=1.6f; l.color=new Color(1,.72f,.38f);
         }
     }
 
@@ -107,7 +107,7 @@ public static class PuebloLunariaFinish
 
     static void FinishLighting(Transform lv){
         var t=Child(lv,"Directional Light_Lunaria"); t.localRotation=Quaternion.Euler(42,-32,0);
-        var l=t.GetComponent<Light>()??t.gameObject.AddComponent<Light>(); l.type=LightType.Directional; l.intensity=1.15f; l.shadows=LightShadows.Soft;
+        Light l=t.GetComponent<Light>(); if(l==null) l=t.gameObject.AddComponent<Light>(); l.type=LightType.Directional; l.intensity=1.15f; l.shadows=LightShadows.Soft;
         RenderSettings.fog=true; RenderSettings.fogColor=new Color(.16f,.18f,.22f); RenderSettings.fogMode=FogMode.Linear; RenderSettings.fogStartDistance=35; RenderSettings.fogEndDistance=95;
     }
 
