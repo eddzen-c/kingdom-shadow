@@ -20,8 +20,7 @@ public sealed class MainMenuController : MonoBehaviour
     [SerializeField] private GoogleOAuthClient googleAuth;
 
     [Header("Escena")]
-    [SerializeField] private string preferredGameScene = "PuebloLunaria_600m";
-    [SerializeField] private string fallbackGameScene = "PuebloLunaria_Main";
+    [SerializeField] private string gameScene = "PuebloLunaria_600m";
 
     private int selectedMode;
 
@@ -38,8 +37,7 @@ public sealed class MainMenuController : MonoBehaviour
         Text newMultiplayerLabel,
         Text newStatusText,
         GoogleOAuthClient newGoogleAuth,
-        string newPreferredGameScene,
-        string newFallbackGameScene)
+        string newGameScene)
     {
         soloButton = newSoloButton;
         multiplayerButton = newMultiplayerButton;
@@ -48,8 +46,7 @@ public sealed class MainMenuController : MonoBehaviour
         multiplayerLabel = newMultiplayerLabel;
         statusText = newStatusText;
         googleAuth = newGoogleAuth;
-        preferredGameScene = newPreferredGameScene;
-        fallbackGameScene = newFallbackGameScene;
+        gameScene = newGameScene;
     }
 
     private void Start()
@@ -126,19 +123,13 @@ public sealed class MainMenuController : MonoBehaviour
 
     private void LoadGameScene()
     {
-        if (Application.CanStreamedLevelBeLoaded(preferredGameScene))
+        if (Application.CanStreamedLevelBeLoaded(gameScene))
         {
-            SceneManager.LoadScene(preferredGameScene);
+            SceneManager.LoadScene(gameScene);
             return;
         }
 
-        if (Application.CanStreamedLevelBeLoaded(fallbackGameScene))
-        {
-            SceneManager.LoadScene(fallbackGameScene);
-            return;
-        }
-
-        SetStatus("No encuentro una escena jugable en Build Settings.");
+        SetStatus("No encuentro PuebloLunaria_600m en Build Settings.");
     }
 
     private void SelectMode(int mode)
