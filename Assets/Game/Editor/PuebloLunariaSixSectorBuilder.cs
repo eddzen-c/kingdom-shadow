@@ -237,7 +237,7 @@ public static class PuebloLunariaSixSectorBuilder
         BuildLantern(decoration, new Vector3(106f, 4f, 3.3f), p);
 
         GameObject abyss = Primitive("B-H01_Abismo_Trigger", PrimitiveType.Cube, hazards,
-            new Vector3(68f, -7f, 0f), new Vector3(80f, 8f, 8f), Quaternion.identity, p.hazard, false);
+            new Vector3(68f, -7f, 0f), new Vector3(80f, 8f, 8f), Quaternion.identity, p.hazard, true);
         BoxCollider abyssCollider = abyss.GetComponent<BoxCollider>();
         abyssCollider.isTrigger = true;
         abyss.GetComponent<Renderer>().enabled = false;
