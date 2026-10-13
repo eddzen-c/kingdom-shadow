@@ -4,6 +4,15 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Game/Scenes/MainMenu.unity
+    guid: 25993af73880a614bae893dd2efeb47b
+  - enabled: 1
+    path: Assets/Game/Scenes/Levels/PuebloLunaria_600m.unity
+    guid: 6bf31cd40e35fb344965a7012b0c31b7
+  - enabled: 1
+    path: Assets/Game/Scenes/Levels/BosqueEncantado_600m.unity
+    guid: e3651fb0a1154444994b086c10736b3d
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
