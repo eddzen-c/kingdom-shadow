@@ -68,7 +68,7 @@ public static class PuebloLunariaSixSectorBuilder
 
         EditorSceneManager.MarkSceneDirty(scene);
         EditorSceneManager.SaveScene(scene, ScenePath);
-        PutSceneFirstInBuildSettings(ScenePath);
+        EnsureSceneInBuildSettings(ScenePath);
         Selection.activeGameObject = root;
 
         Debug.Log("Pueblo de Lunaria 600m generado en: " + ScenePath);
@@ -773,15 +773,21 @@ public static class PuebloLunariaSixSectorBuilder
         }
     }
 
-    private static void PutSceneFirstInBuildSettings(string scenePath)
+    private static void EnsureSceneInBuildSettings(string scenePath)
     {
         List<EditorBuildSettingsScene> scenes = new List<EditorBuildSettingsScene>();
+
+        string mainMenu = "Assets/Game/Scenes/MainMenu.unity";
+        string bosque600m = "Assets/Game/Scenes/Levels/BosqueEncantado_600m.unity";
+
+        if (File.Exists(mainMenu))
+            scenes.Add(new EditorBuildSettingsScene(mainMenu, true));
+
         scenes.Add(new EditorBuildSettingsScene(scenePath, true));
-        foreach (EditorBuildSettingsScene scene in EditorBuildSettings.scenes)
-        {
-            if (!string.Equals(scene.path, scenePath, StringComparison.OrdinalIgnoreCase))
-                scenes.Add(scene);
-        }
+
+        if (File.Exists(bosque600m))
+            scenes.Add(new EditorBuildSettingsScene(bosque600m, true));
+
         EditorBuildSettings.scenes = scenes.ToArray();
     }
 }
