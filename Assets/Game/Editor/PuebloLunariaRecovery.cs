@@ -11,7 +11,7 @@ public static class PuebloLunariaRecovery
     private const string ExactScenePath = "Assets/PuebloLunaria_Blockout_Exact.unity";
     private const string BackupFolder = "Assets/Game/Scenes/Levels/RecoveryBackups";
 
-    [MenuItem("Tools/Kingdom Shadow/Recover Manual Lunaria Progress (through 20.18)")]
+    [MenuItem("Tools/Kingdom Shadow/Maintenance/Restore Legacy Pueblo Blockout")]
     public static void Recover()
     {
         if (!File.Exists(ExactScenePath))
@@ -24,12 +24,12 @@ public static class PuebloLunariaRecovery
         }
 
         if (!EditorUtility.DisplayDialog(
-                "Recuperar progreso manual",
-                "Esto reconstruirá en PuebloLunaria_Blockout_Exact el trabajo manual conocido hasta el paso 20.18:\n\n" +
+                "Restaurar blockout heredado",
+                "Esto restaurará en PuebloLunaria_Blockout_Exact los elementos visuales base:\n\n" +
                 "- CASA-A_REF\n- silueta artística de CASA-A\n- frontón\n- entramado superior y diagonales\n" +
                 "- CASA-B_REF\n- MERCADO_REF\n- PUENTE_REF\n- 5 anclajes de FAROLES\n\n" +
                 "Antes de modificar la escena se creará una copia de respaldo dentro del proyecto.",
-                "Recuperar",
+                "Restaurar",
                 "Cancelar"))
         {
             return;
@@ -76,10 +76,10 @@ public static class PuebloLunariaRecovery
 
         EditorUtility.DisplayDialog(
             "Recuperación completada",
-            "Se reconstruyó el progreso manual conocido hasta el paso 20.18.\n\n" +
+            "Se restauraron los elementos visuales base.\n\n" +
             "Escena restaurada:\n" + ExactScenePath + "\n\n" +
             "Respaldo previo:\n" + backupPath + "\n\n" +
-            "El paso 20.19 NO se añadió, porque indicaste que no lo habías completado.",
+            "La escena quedó restaurada en su configuración base.",
             "Aceptar");
     }
 
@@ -91,14 +91,14 @@ public static class PuebloLunariaRecovery
         RemoveDirectChildIfExists(visualBackground, "PUENTE");
         RemoveDirectChildIfExists(visualBackground, "FAROLES");
 
-        BuildHouseAThrough2018(visualBackground);
+        BuildLegacyHouseA(visualBackground);
         BuildReferenceOnly("CASA-B", visualBackground, new Vector3(37f, 5f, 8f), new Vector3(12f, 9f, 8f));
         BuildReferenceOnly("MERCADO", visualBackground, new Vector3(49f, 3.5f, 5.5f), new Vector3(10f, 5f, 4f));
         BuildReferenceOnly("PUENTE", visualBackground, new Vector3(81f, 0.5f, 7f), new Vector3(14f, 4f, 6f));
         BuildFarolAnchors(visualBackground);
     }
 
-    private static void BuildHouseAThrough2018(Transform parent)
+    private static void BuildLegacyHouseA(Transform parent)
     {
         GameObject house = CreateEmpty("CASA-A", parent);
         house.transform.localPosition = new Vector3(14f, 4f, 7f);

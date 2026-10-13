@@ -30,7 +30,7 @@ public static class PuebloLunariaCompleter
         if (!EditorUtility.DisplayDialog(
             "Completar Pueblo de Lunaria",
             "Se completará la escena manual existente sin reemplazar el gameplay ya construido.\n\n" +
-            "Se añadirá:\n- paso 20.19 y fachada restante de CASA-A\n- CASA-B artística\n- mercado\n- puente\n- faroles\n" +
+            "Se completarán:\n- fachada de CASA-A\n- CASA-B artística\n- mercado\n- puente\n- faroles\n" +
             "- background/foreground base\n- iluminación y materiales provisionales\n\n" +
             "Antes de modificar la escena se creará un respaldo automático.",
             "Completar",
