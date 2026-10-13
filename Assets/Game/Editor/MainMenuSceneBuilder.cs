@@ -212,12 +212,11 @@ public static class MainMenuSceneBuilder
             multiplayerLabel,
             status,
             auth,
-            "PuebloLunaria_600m",
-            "PuebloLunaria_Main");
+            "PuebloLunaria_600m");
 
         EditorSceneManager.MarkSceneDirty(scene);
         EditorSceneManager.SaveScene(scene, ScenePath);
-        PutSceneFirstInBuildSettings(ScenePath);
+        ConfigureBuildSettings();
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
 
@@ -464,17 +463,21 @@ public static class MainMenuSceneBuilder
         rect.sizeDelta = new Vector2(width, height);
     }
 
-    private static void PutSceneFirstInBuildSettings(string scenePath)
+    private static void ConfigureBuildSettings()
     {
-        List<EditorBuildSettingsScene> scenes = new List<EditorBuildSettingsScene>
+        string[] allowedScenes =
         {
-            new EditorBuildSettingsScene(scenePath, true)
+            ScenePath,
+            "Assets/Game/Scenes/Levels/PuebloLunaria_600m.unity",
+            "Assets/Game/Scenes/Levels/BosqueEncantado_600m.unity"
         };
 
-        foreach (EditorBuildSettingsScene existing in EditorBuildSettings.scenes)
+        List<EditorBuildSettingsScene> scenes = new List<EditorBuildSettingsScene>();
+
+        foreach (string path in allowedScenes)
         {
-            if (!string.Equals(existing.path, scenePath, StringComparison.OrdinalIgnoreCase))
-                scenes.Add(existing);
+            if (File.Exists(path))
+                scenes.Add(new EditorBuildSettingsScene(path, true));
         }
 
         EditorBuildSettings.scenes = scenes.ToArray();
