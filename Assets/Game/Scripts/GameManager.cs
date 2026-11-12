@@ -14,11 +14,11 @@ public class GameManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    public void SumarMoneda(int cantidad)
-    {
-        monedas += cantidad;
-        UIManager.instancia.ActualizarMonedas(monedas);
-    }
+public void SumarMoneda(int cantidad)
+{
+    monedas += cantidad;
+    UIManager.instancia.ActualizarMonedas(monedas);
+}
 
     public void SumarPocion(int cantidad)
     {
