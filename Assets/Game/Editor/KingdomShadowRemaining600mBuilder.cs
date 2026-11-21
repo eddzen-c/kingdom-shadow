@@ -152,7 +152,7 @@ public static class KingdomShadowRemaining600mBuilder
             case 4:
                 Flat(g, "Paso_de_nieve", 0, 24, 9, p.ground);
                 Pit(h, "Abismo_03", 24, 28, p.danger);
-                Flat(g, "Pasaje_de_hielo", 28, 56, 9, p.ice, p.icePhysics);
+                Flat(g, "Pasaje_de_hielo", 28, 56, 9, p.ice, physical: p.icePhysics);
                 Slope(g, "Subida_final", 56, 76, 9, 12, p.ice, p.icePhysics);
                 Flat(g, "Antesala_de_la_arena", 76, 100, 12, p.ground);
                 Icicles(h, v, 38, 9, 5, p);
@@ -245,12 +245,13 @@ public static class KingdomShadowRemaining600mBuilder
     }
 
     private static void Flat(Transform root, string name, float x1, float x2, float top,
-        Material material, float depth = 4f)
+        Material material, float depth = 4f, PhysicsMaterial physical = null)
     {
         if (x2 <= x1) throw new ArgumentException("Tramo plano inválido: " + name);
-        Shape(PrimitiveType.Cube, name, root,
+        GameObject floor = Shape(PrimitiveType.Cube, name, root,
             new Vector3((x1 + x2) * .5f, top - .5f, 0f),
             new Vector3(x2 - x1, 1f, depth), Quaternion.identity, material, true);
+        if (physical != null) floor.GetComponent<BoxCollider>().sharedMaterial = physical;
     }
 
     private static void Slope(Transform root, string name, float x1, float x2,
